@@ -135,7 +135,7 @@ class Jar():
         Returns:
             _type_: _description_
         """        
-        if jar_gives.empyt() or jar_receives.full():
+        if jar_gives.empty() or jar_receives.full():
             return False
         
         return True
