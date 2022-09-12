@@ -115,23 +115,3 @@ class Tree():
                 del node
 
             i+=1
-
-
-    def build_solution_tree(self, nodes):
-
-        next_nodes = []
-        for node in nodes:
-            if self.check_solution(node):
-                return self.level(node)
-            else:
-                self.build_tree_for(node)
-                for child in node.children:
-                    next_nodes.append(child)        
-
-        return self.build_solution_tree(next_nodes)
-
-
-    def get_solution(self):
-        nodes = []
-        nodes.append(self.root)
-        return self.build_solution_tree(nodes)
