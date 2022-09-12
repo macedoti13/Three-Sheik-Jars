@@ -105,7 +105,7 @@ class Node():
         Returns:
             _type_: _description_
         """        
-        return tuple(self.jar1.current_amount, self.jar2.current_amount, self.jar3.current_amount)
+        return tuple([self.jar1.current_amount, self.jar2.current_amount, self.jar3.current_amount])
     
 
     def check_solution(self) -> bool:

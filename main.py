@@ -31,6 +31,8 @@ def main():
     tree = Tree()
     if checks_possible(jar1, jar2, jar3):
         tree.add(jar1, jar2, jar3)
+        if tree.check_solution(tree.root):
+            print(tree.level(tree.root))
         print(f'Amount of nodes is the tree: {tree.count}')
     else:
         print('No possible solution!')
