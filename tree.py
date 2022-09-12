@@ -101,16 +101,24 @@ class Tree():
         i = 0
         nodes = n.create_copies()
 
+        print(n.jar1.current_amount, n.jar2.current_amount, n.jar3.current_amount)
+        print('-'*50)
+
         for node in nodes:
             combinations = node.combinations()
             combination = combinations[i]
+
             if node.check_water_dump_possible(combination[0], combination[1]):
                 node.water_dump(combination[0], combination[1])
+
                 if node.state() not in self.states:
                     n.add_child(node)
                     self.add_node(node)
+                    print(node.jar1.current_amount, node.jar2.current_amount, node.jar3.current_amount)
+                    print()
                 else:
                     del node
+
             else: 
                 del node
 
