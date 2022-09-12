@@ -135,6 +135,4 @@ class Node():
             nodes.append(n)
 
         return nodes
-        
-
     
