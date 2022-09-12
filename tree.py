@@ -66,4 +66,15 @@ class Tree():
             i += 1
 
         return i
-            
+
+
+    def check_solution(self, n: Node) -> bool:
+        """_summary_
+
+        Args:
+            n (Node): _description_
+
+        Returns:
+            bool: _description_
+        """        
+        return n.jar1.current_amount == n.jar1.desired_amount and n.jar2.current_amount == n.jar2.desired_amount and n.jar3.current_amount == n.jar3.desired_amount
