@@ -28,6 +28,7 @@ class Node():
             n (_type_): _description_
         """        
         self.children.append(n)
+        n.parent = self
 
 
     def copy(self):

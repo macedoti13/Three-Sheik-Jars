@@ -80,5 +80,26 @@ class Tree():
         jar1_done = n.jar1.current_amount == n.jar1.desired_amount
         jar2_done = n.jar2.current_amount == n.jar2.desired_amount
         jar3_done = n.jar3.current_amount == n.jar3.desired_amount
-        
+
         return jar1_done and jar2_done and jar3_done
+
+
+    def build_tree_for(self, n: Node):
+
+        i = 0
+        nodes = n.create_copies()
+
+        for node in nodes:
+            combinations = node.combinations()
+            combination = combinations[i]
+            if node.check_water_dump_possible(combination[0], combination[1]):
+                node.water_dump(combination[0], combination[1])
+                if node.state() not in self.states():
+                    n.add_child(node)
+                    self.states.append(node.state())
+                else:
+                    del node
+            else: 
+                del node
+
+            i+=1
