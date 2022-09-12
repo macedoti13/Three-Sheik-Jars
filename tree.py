@@ -90,7 +90,14 @@ class Tree():
 
 
     def build_tree_for(self, n: Node):
+        """_summary_
 
+        Args:
+            n (Node): _description_
+
+        Returns:
+            _type_: _description_
+        """        
         i = 0
         nodes = n.create_copies()
 
@@ -102,13 +109,29 @@ class Tree():
                 if node.state() not in self.states:
                     n.add_child(node)
                     self.add_node(node)
-                    if self.check_solution(node):
-                        return self.level(node)
                 else:
                     del node
             else: 
                 del node
 
             i+=1
-        
-        return None
+
+
+    def build_solution_tree(self, nodes):
+
+        next_nodes = []
+        for node in nodes:
+            if self.check_solution(node):
+                return self.level(node)
+            else:
+                self.build_tree_for(node)
+                for child in node.children:
+                    next_nodes.append(child)        
+
+        return self.build_solution_tree(next_nodes)
+
+
+    def get_solution(self):
+        nodes = []
+        nodes.append(self.root)
+        return self.build_solution_tree(nodes)

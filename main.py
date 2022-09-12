@@ -34,16 +34,9 @@ def main():
         if tree.check_solution(tree.root):
             print(tree.level(tree.root))
         else:
-            solution = tree.build_tree_for(tree.root)
-            if solution:
-                print(f'Solution: {solution}')
+            solution = tree.get_solution()
+            print(solution)
         print(f'Amount of nodes is the tree: {tree.count}')
-        print(tree.root.children)
-        for child in tree.root.children:
-            print(child.jar1.current_amount)
-            print(child.jar2.current_amount)
-            print(child.jar3.current_amount)
-            print()
     else:
         print('No possible solution!')
 
