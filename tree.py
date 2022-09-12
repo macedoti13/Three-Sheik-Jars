@@ -33,6 +33,11 @@ class Tree():
             self.count += 1
 
 
+    def add_node(self, n: Node) -> None:
+        self.states.append(n.state())
+        self.count +=1 
+
+
     def remove(self, n: Node) -> None:
         """_summary_
 
@@ -94,12 +99,16 @@ class Tree():
             combination = combinations[i]
             if node.check_water_dump_possible(combination[0], combination[1]):
                 node.water_dump(combination[0], combination[1])
-                if node.state() not in self.states():
+                if node.state() not in self.states:
                     n.add_child(node)
-                    self.states.append(node.state())
+                    self.add_node(node)
+                    if self.check_solution(node):
+                        return self.level(node)
                 else:
                     del node
             else: 
                 del node
 
             i+=1
+        
+        return None

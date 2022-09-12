@@ -25,15 +25,25 @@ def checks_possible(jar1: Jar, jar2: Jar, jar3: Jar) -> bool:
 
 
 def main():
-    jar1 = Jar(10, 5, 5)
-    jar2 = Jar(10, 5, 5)
-    jar3 = Jar(10, 5, 5)
+    jar1 = Jar(12, 10, 4)
+    jar2 = Jar(25, 20, 20)
+    jar3 = Jar(17, 11, 17)
     tree = Tree()
     if checks_possible(jar1, jar2, jar3):
         tree.add(jar1, jar2, jar3)
         if tree.check_solution(tree.root):
             print(tree.level(tree.root))
+        else:
+            solution = tree.build_tree_for(tree.root)
+            if solution:
+                print(f'Solution: {solution}')
         print(f'Amount of nodes is the tree: {tree.count}')
+        print(tree.root.children)
+        for child in tree.root.children:
+            print(child.jar1.current_amount)
+            print(child.jar2.current_amount)
+            print(child.jar3.current_amount)
+            print()
     else:
         print('No possible solution!')
 
