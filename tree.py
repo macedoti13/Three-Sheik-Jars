@@ -77,4 +77,8 @@ class Tree():
         Returns:
             bool: _description_
         """        
-        return n.jar1.current_amount == n.jar1.desired_amount and n.jar2.current_amount == n.jar2.desired_amount and n.jar3.current_amount == n.jar3.desired_amount
+        jar1_done = n.jar1.current_amount == n.jar1.desired_amount
+        jar2_done = n.jar2.current_amount == n.jar2.desired_amount
+        jar3_done = n.jar3.current_amount == n.jar3.desired_amount
+        
+        return jar1_done and jar2_done and jar3_done
