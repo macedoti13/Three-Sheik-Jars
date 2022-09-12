@@ -34,9 +34,7 @@ def main():
         if tree.check_solution(tree.root):
             print(tree.level(tree.root))
         else:
-            tree.build_tree_for(tree.root)
-        print(f'Amount of nodes is the tree: {tree.count}')
-        print(f'States: {tree.states}')
+            pass
     else:
         print('No possible solution!')
 
