@@ -114,7 +114,8 @@ class Tree():
                 if node.state() not in self.states:
                     n.add_child(node)
                     self.add_node(node)
-                    print(node.jar1.current_amount, node.jar2.current_amount, node.jar3.current_amount)
+                    print('father:', n.parent.jar1.current_amount, n.jar2.current_amount, n.jar3.current_amount)
+                    print('son:', node.jar1.current_amount, node.jar2.current_amount, node.jar3.current_amount)
                     print()
                 else:
                     del node
@@ -123,3 +124,51 @@ class Tree():
                 del node
 
             i+=1
+
+
+    def get_leaf_nodes(self):
+        leafs = []
+        self._collect_leaf_nodes(self.root, leafs)
+        return leafs
+
+
+    def _collect_leaf_nodes(self, node, leafs):
+        if node is not None:
+            if len(node.children) == 0:
+                leafs.append(node)
+            for n in node.children:
+                self._collect_leaf_nodes(n, leafs)
+
+
+    def find_solution_leafs(self):
+        for node in self.get_leaf_nodes():
+            if self.check_solution(node):
+                return self.level(node)
+        return None
+
+
+    def build_tree(self, n_list: Node):
+
+        new_n_list = []
+
+        for n in n_list:
+            self.build_tree_for(n)
+
+        for leaf in self.get_leaf_nodes():
+            if self.check_solution(leaf):
+                return self.level(leaf)
+            else:
+                self.build_tree_for(leaf)
+                for child in leaf.children:
+                    new_n_list.append(child)
+        
+        return self.build_tree(new_n_list)
+
+
+    def get_solution(self):
+        n_list = []
+        n_list.append(self.root)
+        return self.build_tree(n_list)
+
+
+        
