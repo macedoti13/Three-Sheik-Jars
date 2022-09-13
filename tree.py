@@ -1,49 +1,28 @@
 from jar import Jar
-from node import Node
+from node import Node, check_solution
 
 class Tree():    
 
 
-    def __init__(self, root: Node = None, count: int = 0, states: list = []) -> None:
+    def __init__(self) -> None:
 
-        self.root = root
-        self.count = count
-        self.states = states
+        self.root = None
+        self.count = 0
+        self.states = []
 
 
-    def add(self, jar1: Jar, jar2: Jar, jar3: Jar, parent: Node = None) -> None:
-        """_summary_
-
-        Args:
-            jar1 (Jar): _description_
-            jar2 (Jar): _description_
-            jar3 (Jar): _description_
-            parent (Node, optional): _description_. Defaults to None.
-        """        
-        n = Node(jar1, jar2, jar3)
-
-        if n.state() not in self.states:
-            if parent == None and self.root == None:
-                self.root = n 
-            elif parent != None:
-                n.parent = parent
+    def add(self, n: Node, parent: Node = None) -> None:
+        if n.state not in self.states:
+            if self.root == None and parent == None:
+                self.root = n
+            else:
                 parent.add_child(n)
 
             self.states.append(n.state())
-            self.count += 1
-
-
-    def add_node(self, n: Node) -> None:
-        self.states.append(n.state())
-        self.count +=1 
+            self.count += 1 
 
 
     def remove(self, n: Node) -> None:
-        """_summary_
-
-        Args:
-            n (Node): _description_
-        """        
         if n == self.root:
             self.root = None
         else:
@@ -51,19 +30,11 @@ class Tree():
             n.children.clear()
 
         self.count -= 1
-        self.states.remove(n.state())
+        self.states.remove(n.state)
         del n
 
 
-    def level(self, n: Node) -> int:
-        """_summary_
-
-        Args:
-            n (Node): _description_
-
-        Returns:
-            int: _description_
-        """        
+    def level(self, n: Node) -> int:    
         i = 0
 
         while n != self.root:
@@ -73,65 +44,34 @@ class Tree():
         return i
 
 
-    def check_solution(self, n: Node) -> bool:
-        """_summary_
-
-        Args:
-            n (Node): _description_
-
-        Returns:
-            bool: _description_
-        """        
-        jar1_done = n.jar1.current_amount == n.jar1.desired_amount
-        jar2_done = n.jar2.current_amount == n.jar2.desired_amount
-        jar3_done = n.jar3.current_amount == n.jar3.desired_amount
-
-        return jar1_done and jar2_done and jar3_done
-
-
-    def build_tree_for(self, n: Node):
-        """_summary_
-
-        Args:
-            n (Node): _description_
-
-        Returns:
-            _type_: _description_
-        """        
+    def _build_tree_for(self, n: Node) -> None:
+        
         i = 0
-        nodes = n.create_copies() 
-
-        for node in nodes:
-            combinations = node.combinations() 
-            combination = combinations[i]
-            print('node before water dump', node.state())
-            if node.check_water_dump_possible(combination[0], combination[1]):
-                print('water dump is possible')
+        for node in n.create_copies():
+            combination = node.combinations()[i]
+            if node.check_water_dump_possibility(combination[0], combination[1]):
                 node.water_dump(combination[0], combination[1])
-                print('node after water dump', node.state())
-
                 if node.state() not in self.states:
-                    n.add_child(node)
-                    self.add_node(node)
+                    self.add(node, parent=n)
                 else:
                     del node
-
-            else: 
-                print('water dump was not possible')
+            else:
                 del node
-
-            print()
             i+=1
 
 
-    def get_leaf_nodes(self):
-        leafs = []
-        self._collect_leaf_nodes(self.root,leafs)
-        return leafs
+    def _build_solutions_tree(self, node_list: list):
+        next_nodes = []
+        for node in node_list:
+            if check_solution(node) == True:
+                return self.level(node)
+        for node in node_list:
+            self._build_tree_for(node)
+            for child in node.children:
+                next_nodes.append(child)
+        return self._build_solutions_tree(next_nodes)
 
-    def _collect_leaf_nodes(self, node, leafs):
-        if node is not None:
-            if len(node.children) == 0:
-                leafs.append(node)
-            for n in node.children:
-                self._collect_leaf_nodes(n, leafs)
+
+
+    def build_tree(self):
+        return self._build_solutions_tree([self.root])
