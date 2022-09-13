@@ -89,7 +89,7 @@ class Jar():
         Returns:
             bool: _description_
         """        
-        return self.current_amount == self.desired_amount
+        return self.current_amount == self.capacity
 
 
     def empty(self) -> bool:
@@ -103,15 +103,6 @@ class Jar():
 
     @staticmethod
     def water_dump(jar_gives, jar_receives):
-        """_summary_
-
-        Args:
-            jar_gives (_type_): _description_
-            jar_receives (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """        
         jar_receives_remaining_capacity = jar_receives.capacity - jar_receives.current_amount
 
         if (jar_gives.current_amount == jar_receives_remaining_capacity) or (jar_gives.current_amount < jar_receives_remaining_capacity):
@@ -126,15 +117,6 @@ class Jar():
 
     @staticmethod
     def check_water_dump_possibility(jar_gives, jar_receives):
-        """_summary_
-
-        Args:
-            jar_gives (_type_): _description_
-            jar_receives (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """        
         if jar_gives.empty() or jar_receives.full():
             return False
         

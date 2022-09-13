@@ -78,25 +78,10 @@ class Node():
 
 
     def water_dump(self, jar_gives: Jar, jar_receives: Jar) -> None:
-        """_summary_
-
-        Args:
-            jar_gives (Jar): _description_
-            jar_receives (Jar): _description_
-        """        
         jar_gives, jar_receives = Jar.water_dump(jar_gives, jar_receives)
 
 
     def check_water_dump_possibility(self, jar_gives, jar_receives):
-        """_summary_
-
-        Args:
-            jar_gives (_type_): _description_
-            jar_receives (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """        
         return Jar.check_water_dump_possibility(jar_gives, jar_receives)
 
 
@@ -135,3 +120,7 @@ class Node():
             nodes.append(n)
 
         return nodes
+
+
+    def print_node(self):
+        print({self.jar1.current_amount, self.jar2.current_amount, self.jar3.current_amount})

@@ -99,14 +99,16 @@ class Tree():
             _type_: _description_
         """        
         i = 0
-        nodes = n.create_copies()
+        nodes = n.create_copies() 
 
         for node in nodes:
-            combinations = node.combinations()
+            combinations = node.combinations() 
             combination = combinations[i]
-
+            print('node before water dump', node.state())
             if node.check_water_dump_possible(combination[0], combination[1]):
+                print('water dump is possible')
                 node.water_dump(combination[0], combination[1])
+                print('node after water dump', node.state())
 
                 if node.state() not in self.states:
                     n.add_child(node)
@@ -115,5 +117,21 @@ class Tree():
                     del node
 
             else: 
+                print('water dump was not possible')
                 del node
+
+            print()
             i+=1
+
+
+    def get_leaf_nodes(self):
+        leafs = []
+        self._collect_leaf_nodes(self.root,leafs)
+        return leafs
+
+    def _collect_leaf_nodes(self, node, leafs):
+        if node is not None:
+            if len(node.children) == 0:
+                leafs.append(node)
+            for n in node.children:
+                self._collect_leaf_nodes(n, leafs)
