@@ -4,6 +4,16 @@ from node import Node
 
 
 def checks_possible(jar1: Jar, jar2: Jar, jar3: Jar) -> bool:
+    """Checks if there's a solution for a specific jar organization
+
+    Args:
+        jar1 (Jar): first jar 
+        jar2 (Jar): second jar
+        jar3 (Jar): third jar
+
+    Returns:
+        bool: True if there's a solution for the problem
+    """    
     total_amount = jar1.current_amount + jar2.current_amount + jar3.current_amount
     total_capacity = jar1.capacity + jar2.capacity + jar3.capacity
     total_desired = jar1.desired_amount + jar2.desired_amount + jar3.desired_amount
