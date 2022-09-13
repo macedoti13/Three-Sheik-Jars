@@ -25,9 +25,9 @@ def checks_possible(jar1: Jar, jar2: Jar, jar3: Jar) -> bool:
 
 
 def main():
-    jar1 = Jar(12, 10, 4)
-    jar2 = Jar(25, 20, 20)
-    jar3 = Jar(17, 11, 17)
+    jar1 = Jar(16, 9, 0)
+    jar2 = Jar(28, 11, 25)
+    jar3 = Jar(29, 11, 6)
     tree = Tree()
     if checks_possible(jar1, jar2, jar3):
         tree.add(jar1, jar2, jar3)

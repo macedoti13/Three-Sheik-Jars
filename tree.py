@@ -116,5 +116,4 @@ class Tree():
 
             else: 
                 del node
-
             i+=1
