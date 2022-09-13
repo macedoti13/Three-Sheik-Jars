@@ -1,19 +1,7 @@
 class Jar():
 
 
-    def __init__(self, capacity: int, current_amount: int, desired_amount: int) -> None:   
-        """_summary_
-
-        Args:
-            capacity (int): _description_
-            current_amount (int): _description_
-            desired_amount (int): _description_
-
-        Raises:
-            Exception: _description_
-            Exception: _description_
-            Exception: _description_
-        """        
+    def __init__(self, capacity: int, current_amount: int, desired_amount: int) -> None:         
         if capacity > 40 or capacity < 0:
             raise Exception
         elif current_amount > capacity or current_amount < 0:
@@ -28,25 +16,21 @@ class Jar():
 
     @property
     def capacity(self):
-        """"""
         return self.__capacity
 
     
     @property
     def current_amount(self):
-        """"""
         return self.__current_amount
 
 
     @property
     def desired_amount(self):
-        """"""
         return self.__desired_amount
 
 
     @current_amount.setter
     def current_amount(self, new_amount: int) -> None:
-        """"""        
         if new_amount > self.__capacity:
             raise Exception
         if isinstance(new_amount, int):
@@ -54,14 +38,6 @@ class Jar():
 
 
     def remove_water(self, amount: int) -> None:
-        """_summary_
-
-        Args:
-            amount (int): _description_
-
-        Raises:
-            Exception: _description_
-        """        
         if amount < 0 or amount > self.__current_amount:
             raise Exception
 
@@ -69,35 +45,17 @@ class Jar():
 
 
     def add_water(self, amount: int) -> None:
-        """_summary_
-
-        Args:
-            amount (int): _description_
-
-        Raises:
-            Exception: _description_
-        """        
         if amount < 0 or amount + self.__current_amount > self.__capacity:
             raise Exception
         
         self.__current_amount += amount
 
     
-    def full(self) -> bool:
-        """_summary_
-
-        Returns:
-            bool: _description_
-        """        
+    def full(self) -> bool:    
         return self.current_amount == self.capacity
 
 
-    def empty(self) -> bool:
-        """_summary_
-
-        Returns:
-            bool: _description_
-        """        
+    def empty(self) -> bool:   
         return self.current_amount == 0
         
 
