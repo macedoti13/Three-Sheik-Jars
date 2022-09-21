@@ -1,4 +1,3 @@
-from jar import Jar
 from node import Node, check_solution
 
 class Tree():    
