@@ -89,6 +89,7 @@ class Node():
         """        
         jar_gives, jar_receives = Jar.water_dump(jar_gives, jar_receives)
 
+
     def check_water_dump_possibility(self, jar_gives, jar_receives):
         """Check if it's possible to perform a water dump between two jars for a given node
 
